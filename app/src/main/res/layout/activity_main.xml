@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/exomedia_leanback_ripple_selector"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:background="@null"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.045"-->
+<!--        tools:ignore="MissingConstraints">-->
+
+<!--    </androidx.recyclerview.widget.RecyclerView>-->
+
+    <!--    <Button-->
+<!--        android:id="@+id/btnKhazar"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:text="Xazar Tv"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnReal"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="RealTV"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/btnKhazar"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnKhazar" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnAzad"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="AzadTv"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/btnReal"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnReal" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnIctimai"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="IctimaiTv"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/btnAzad"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnAzad" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnIdman"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="IdmanTv"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/btnIctimai"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnIctimai" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnCbc"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:text="CBC TV"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/btnKhazar"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/btnKhazar" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnAzTv"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="Az Tv"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/btnReal"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnCbc" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnArb"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="32dp"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:text="ARB TV"-->
+<!--        app:layout_constraintStart_toEndOf="@+id/btnAzad"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/btnAzTv" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
