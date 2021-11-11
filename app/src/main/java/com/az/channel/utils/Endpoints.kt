@@ -7,9 +7,9 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface Endpoints {
-    @GET("iptv.json")
+    @GET("/getChannelList")
     fun getChannelList(): Call<List<ChannelItemNew>>
 
-    @GET("image.json")
+    @GET("/getBackgroundImage")
     fun getBackgroundImage(): Call<BackgroundImage>
  }

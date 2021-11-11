@@ -7,8 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.az.channel.R
+
 import com.az.channel.model.ChannelItemNew
+
 
 var channelListArray: List<ChannelItemNew> = emptyList()
 
@@ -17,7 +18,7 @@ class ChannelListNewAdapter(private val movies: List<ChannelItemNew>): RecyclerV
     var onItemClick: ((ChannelItemNew) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.channel_list_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(com.az.channel.R.layout.channel_list_item, parent, false)
         channelListArray = movies
         return MoviesViewHolder(view, onItemClick)
     }
@@ -33,8 +34,8 @@ class ChannelListNewAdapter(private val movies: List<ChannelItemNew>): RecyclerV
 
 
 class MoviesViewHolder(itemView: View, onItemClick: ((ChannelItemNew) -> Unit)?): RecyclerView.ViewHolder(itemView) {
-    private val photo: ImageView = itemView.findViewById(R.id.movie_photo)
-    private val title: TextView = itemView.findViewById(R.id.movie_title)
+    private val photo: ImageView = itemView.findViewById(com.az.channel.R.id.movie_photo)
+    private val title: TextView = itemView.findViewById(com.az.channel.R.id.movie_title)
 
     init {
         itemView.setOnClickListener {
@@ -43,6 +44,7 @@ class MoviesViewHolder(itemView: View, onItemClick: ((ChannelItemNew) -> Unit)?)
     }
 
     fun bind(channel: ChannelItemNew) {
+
         Glide.with(itemView.context).load(channel.logoUrl).into(photo)
         title.text = channel.name
     }
