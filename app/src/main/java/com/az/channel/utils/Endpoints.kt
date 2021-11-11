@@ -1,5 +1,6 @@
 package com.az.channel.utils
 
+import com.az.channel.model.BackgroundImage
 import com.az.channel.model.ChannelItemNew
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -9,6 +10,6 @@ interface Endpoints {
     @GET("iptv.json")
     fun getChannelList(): Call<List<ChannelItemNew>>
 
-    @GET("images.json")
-    fun getBackgroundImage(): Call<JsonObject>
+    @GET("image.json")
+    fun getBackgroundImage(): Call<BackgroundImage>
  }
