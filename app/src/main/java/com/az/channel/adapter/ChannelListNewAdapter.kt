@@ -28,6 +28,7 @@ class ChannelListNewAdapter(private val movies: List<ChannelItemNew>): RecyclerV
     }
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
+        
         return holder.bind(movies[position])
     }
 }
@@ -48,5 +49,7 @@ class MoviesViewHolder(itemView: View, onItemClick: ((ChannelItemNew) -> Unit)?)
         Glide.with(itemView.context).load(channel.logoUrl).into(photo)
         title.text = channel.name
     }
+
+
 
 }
