@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.az.channel.adapter.ChannelListNewAdapter
 import com.az.channel.m3u.ChannelItem
 import com.az.channel.m3u.ChannelList
@@ -29,10 +30,10 @@ class MainActivity : AppCompatActivity() {
 //                Log.e("here i am ",response.body()?.results?.get(0)?.name)
                 if (response.isSuccessful){
                     val newAdapter = ChannelListNewAdapter(response.body()!!)
-//                    recyclerView.apply {
-//                        layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false);
-//                        adapter = newAdapter
-//                    }
+                    recyclerView.apply {
+                        layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false);
+                        adapter = newAdapter
+                    }
                     newAdapter.onItemClick = { channel ->
                         playTv(channel.streamUrl)
                     }
