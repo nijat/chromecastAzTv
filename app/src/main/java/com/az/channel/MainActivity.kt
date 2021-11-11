@@ -11,6 +11,7 @@ import com.az.channel.m3u.ChannelItem
 import com.az.channel.m3u.ChannelList
 import com.az.channel.model.BackgroundImage
 import com.az.channel.model.ChannelItemNew
+import com.az.channel.model.WeatherInfo
 import com.az.channel.utils.Endpoints
 import com.az.channel.utils.ServiceBuilder
 import com.bumptech.glide.Glide
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         getBackgroundImage()
         getListOfChannel()
-
+        getWeatherInformation()
     }
 
     private fun playTv(url: String){
@@ -80,5 +81,23 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+
+    private fun getWeatherInformation(){
+        val request = ServiceBuilder.buildService(Endpoints::class.java)
+        val call = request.getWeatherInformation()
+        call.enqueue(object : retrofit2.Callback<WeatherInfo>{
+            override fun onResponse(call: retrofit2.Call<WeatherInfo>, response: retrofit2.Response<WeatherInfo>) {
+                if (response.isSuccessful){
+                    weather_temperature.text = response.body()!!.temperature
+                }
+            }
+            override fun onFailure(call: retrofit2.Call<WeatherInfo>, t: Throwable) {
+                Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
+    }
+
+
 
 }
