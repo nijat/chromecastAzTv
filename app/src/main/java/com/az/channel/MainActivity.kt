@@ -24,28 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         getBackgroundImage()
-        val request = ServiceBuilder.buildService(Endpoints::class.java)
-        val call = request.getChannelList()
-        call.enqueue(object : retrofit2.Callback<List<ChannelItemNew>>{
-            override fun onResponse(call: retrofit2.Call<List<ChannelItemNew>>, response: retrofit2.Response<List<ChannelItemNew>>) {
-                Log.e("here i am", "test1")
-                Log.e("here i am", response.body().toString())
-//                Log.e("here i am ",response.body()?.results?.get(0)?.name)
-                if (response.isSuccessful){
-                    val newAdapter = ChannelListNewAdapter(response.body()!!)
-                    recyclerView.apply {
-                        layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false);
-                        adapter = newAdapter
-                    }
-                    newAdapter.onItemClick = { channel ->
-                        playTv(channel.streamUrl)
-                    }
-                }
-            }
-            override fun onFailure(call: retrofit2.Call<List<ChannelItemNew>>, t: Throwable) {
-                Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
+        getListOfChannel()
 
     }
 
@@ -69,23 +48,33 @@ class MainActivity : AppCompatActivity() {
         val call = request.getBackgroundImage()
         call.enqueue(object : retrofit2.Callback<BackgroundImage>{
             override fun onResponse(call: retrofit2.Call<BackgroundImage>, response: retrofit2.Response<BackgroundImage>) {
-                Log.e("here i am", "test1")
-                Log.e("here i am", response.body().toString())
-//                Log.e("here i am ",response.body()?.results?.get(0)?.name)
                 if (response.isSuccessful){
                     Glide.with(this@MainActivity).load(response.body()?.imageUrl).into(imageView2)
-
-//                    val newAdapter = ChannelListNewAdapter(response.body())
-//                    recyclerView.apply {
-//                        layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false);
-//                        adapter = newAdapter
-//                    }
-//                    newAdapter.onItemClick = { channel ->
-//                        playTv(channel.streamUrl)
-//                    }
                 }
             }
             override fun onFailure(call: retrofit2.Call<BackgroundImage>, t: Throwable) {
+                Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun getListOfChannel(){
+        val request = ServiceBuilder.buildService(Endpoints::class.java)
+        val call = request.getChannelList()
+        call.enqueue(object : retrofit2.Callback<List<ChannelItemNew>>{
+            override fun onResponse(call: retrofit2.Call<List<ChannelItemNew>>, response: retrofit2.Response<List<ChannelItemNew>>) {
+                if (response.isSuccessful){
+                    val newAdapter = ChannelListNewAdapter(response.body()!!)
+                    recyclerView.apply {
+                        layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false);
+                        adapter = newAdapter
+                    }
+                    newAdapter.onItemClick = { channel ->
+                        playTv(channel.streamUrl)
+                    }
+                }
+            }
+            override fun onFailure(call: retrofit2.Call<List<ChannelItemNew>>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
