@@ -7,14 +7,19 @@
     android:layout_marginLeft="30dp"
     android:orientation="vertical">
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/spdv_details_cv"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:cardBackgroundColor="#D82E2E2E"
         app:cardCornerRadius="10dp"
         app:cardElevation="0dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toTopOf="@+id/movie_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
