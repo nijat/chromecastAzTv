@@ -1,5 +1,6 @@
 package com.az.channel
 
+import android.R.attr
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,10 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
+import android.R.attr.data
+
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,18 +38,53 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        if (event.action === KeyEvent.ACTION_DOWN) {
-            when (keyCode) {
-                20 -> recyclerView.findViewHolderForAdapterPosition(1)?.itemView?.performClick()
-                19 -> {
-                    recyclerView.findViewHolderForAdapterPosition(1)?.itemView?.requestFocus()
-                }
+        var handled = false
+        when (keyCode) {
+            KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_BUTTON_A ->         // ... handle selections
+            {Toast.makeText(
+                this.applicationContext, keyCode.toString(),
+                Toast.LENGTH_LONG
+            ).show();
+//                recyclerView.scrollToPosition(3)
+//                recyclerView.requestFocus()
+                recyclerView.getChildAt(2).requestFocus();
+                handled = true}
+            KeyEvent.KEYCODE_DPAD_LEFT ->         // ... handle left action
+            {Toast.makeText(
+                this.applicationContext, keyCode.toString(),
+                Toast.LENGTH_LONG
+            ).show();
+                handled = true
+//                recyclerView.scrollToPosition(4)
+//                recyclerView.requestFocus()
+                recyclerView.getChildAt(1).requestFocus();
 
             }
+            KeyEvent.KEYCODE_DPAD_RIGHT ->{
+                Toast.makeText(
+                    this.applicationContext, keyCode.toString(),
+                    Toast.LENGTH_LONG
+                ).show();
+//                recyclerView.scrollToPosition(5)
+//                recyclerView.requestFocus()
+                recyclerView.getChildAt(3).requestFocus();
+                handled = true
+            }
+            KeyEvent.KEYCODE_DPAD_DOWN ->{
+                Toast.makeText(
+                    this.applicationContext, keyCode.toString(),
+                    Toast.LENGTH_LONG
+                ).show();
+                handled = true
+//                recyclerView.requestFocus()
+//                recyclerView.scrollToPosition(0)
+//                recyclerView.requestFocus()
+                recyclerView.getChildAt(0).requestFocus();
+            }  // ... handle right action
 
-            city_name.text = keyCode.toString()
+
         }
-        return super.onKeyDown(keyCode, event)
+        return handled || super.onKeyDown(keyCode, event)
     }
 
     private fun playTv(url: String){
@@ -77,15 +117,22 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun getListOfChannel(){
+    private fun getListOfChannel() {
         val request = ServiceBuilder.buildService(Endpoints::class.java)
         val call = request.getChannelList()
-        call.enqueue(object : retrofit2.Callback<List<ChannelItemNew>>{
-            override fun onResponse(call: retrofit2.Call<List<ChannelItemNew>>, response: retrofit2.Response<List<ChannelItemNew>>) {
-                if (response.isSuccessful){
+        call.enqueue(object : retrofit2.Callback<List<ChannelItemNew>> {
+            override fun onResponse(
+                call: retrofit2.Call<List<ChannelItemNew>>,
+                response: retrofit2.Response<List<ChannelItemNew>>
+            ) {
+                if (response.isSuccessful) {
                     val newAdapter = ChannelListNewAdapter(response.body()!!)
                     recyclerView.apply {
-                        layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false);
+                        layoutManager = LinearLayoutManager(
+                            this@MainActivity,
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                        );
                         adapter = newAdapter
                     }
                     newAdapter.onItemClick = { channel ->
@@ -93,6 +140,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+
             override fun onFailure(call: retrofit2.Call<List<ChannelItemNew>>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
