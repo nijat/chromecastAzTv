@@ -31,10 +31,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
-        if (event.getAction() === KeyEvent.ACTION_DOWN) {
-//            when (keyCode) {
+        if (event.action === KeyEvent.ACTION_DOWN) {
+//            when (keyCode==20) {
 //
 //            }
+            recyclerView.requestFocus()
             city_name.text = keyCode.toString()
         }
         return super.onKeyDown(keyCode, event)
