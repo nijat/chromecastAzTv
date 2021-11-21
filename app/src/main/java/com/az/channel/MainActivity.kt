@@ -32,10 +32,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (event.action === KeyEvent.ACTION_DOWN) {
-//            when (keyCode==20) {
-//
-//            }
-            recyclerView.requestFocus()
+            when (keyCode) {
+                20 -> recyclerView.findViewHolderForAdapterPosition(4)?.itemView?.performClick()
+                19 -> recyclerView.findViewHolderForAdapterPosition(4)?.itemView?.requestFocus()
+
+            }
+
             city_name.text = keyCode.toString()
         }
         return super.onKeyDown(keyCode, event)
