@@ -28,13 +28,17 @@ class MainActivity : AppCompatActivity() {
         getBackgroundImage()
         getListOfChannel()
         getWeatherInformation()
+        recyclerView.isFocusableInTouchMode = true;
+
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         if (event.action === KeyEvent.ACTION_DOWN) {
             when (keyCode) {
-                20 -> recyclerView.findViewHolderForAdapterPosition(4)?.itemView?.performClick()
-                19 -> recyclerView.findViewHolderForAdapterPosition(4)?.itemView?.requestFocus()
+                20 -> recyclerView.findViewHolderForAdapterPosition(1)?.itemView?.performClick()
+                19 -> {
+                    recyclerView.findViewHolderForAdapterPosition(1)?.itemView?.requestFocus()
+                }
 
             }
 
