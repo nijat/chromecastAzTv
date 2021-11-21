@@ -3,6 +3,7 @@ package com.az.channel
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +28,16 @@ class MainActivity : AppCompatActivity() {
         getBackgroundImage()
         getListOfChannel()
         getWeatherInformation()
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        if (event.getAction() === KeyEvent.ACTION_DOWN) {
+//            when (keyCode) {
+//
+//            }
+            city_name.text = keyCode.toString()
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     private fun playTv(url: String){
