@@ -23,9 +23,9 @@ import okhttp3.*
 import android.R.attr.data
 
 
-
-
 class MainActivity : AppCompatActivity() {
+
+    var index = 0;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,63 +34,41 @@ class MainActivity : AppCompatActivity() {
         getListOfChannel()
         getWeatherInformation()
         recyclerView.isFocusableInTouchMode = true;
-
+        index = 0;
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
         var handled = false
         when (keyCode) {
-            KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_BUTTON_A ->         // ... handle selections
-            {Toast.makeText(
-                this.applicationContext, keyCode.toString(),
-                Toast.LENGTH_LONG
-            ).show();
-//                recyclerView.scrollToPosition(3)
-//                recyclerView.requestFocus()
-                recyclerView.getChildAt(2).requestFocus();
-                handled = true}
+
             KeyEvent.KEYCODE_DPAD_LEFT ->         // ... handle left action
-            {Toast.makeText(
-                this.applicationContext, keyCode.toString(),
-                Toast.LENGTH_LONG
-            ).show();
-                handled = true
-//                recyclerView.scrollToPosition(4)
-//                recyclerView.requestFocus()
-                recyclerView.getChildAt(1).requestFocus();
-
-            }
-            KeyEvent.KEYCODE_DPAD_RIGHT ->{
-                Toast.makeText(
-                    this.applicationContext, keyCode.toString(),
-                    Toast.LENGTH_LONG
-                ).show();
-//                recyclerView.scrollToPosition(5)
-//                recyclerView.requestFocus()
-                recyclerView.getChildAt(3).requestFocus();
+            {
+                index--
+                try {
+                    recyclerView.getChildAt(index).requestFocus()
+                } catch (ex: Exception) {
+                    index++
+                }
                 handled = true
             }
-            KeyEvent.KEYCODE_DPAD_DOWN ->{
-                Toast.makeText(
-                    this.applicationContext, keyCode.toString(),
-                    Toast.LENGTH_LONG
-                ).show();
+            KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                index++
+                try {
+                    recyclerView.getChildAt(index).requestFocus()
+                } catch (ex: Exception) {
+                    index--
+                }
                 handled = true
-//                recyclerView.requestFocus()
-//                recyclerView.scrollToPosition(0)
-//                recyclerView.requestFocus()
-                recyclerView.getChildAt(0).requestFocus();
-            }  // ... handle right action
-
-
+            }
         }
         return handled || super.onKeyDown(keyCode, event)
     }
 
-    private fun playTv(url: String){
+    private fun playTv(url: String) {
         val new = mapOf<String, String>("test" to "s")
         val cl = ChannelList()
-        val ci = ChannelItem(name="test", url=url,
+        val ci = ChannelItem(
+            name = "test", url = url,
             metadata = new
         )
         cl.add(ci)
@@ -102,15 +80,19 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun getBackgroundImage(){
+    private fun getBackgroundImage() {
         val request = ServiceBuilder.buildService(Endpoints::class.java)
         val call = request.getBackgroundImage()
-        call.enqueue(object : retrofit2.Callback<BackgroundImage>{
-            override fun onResponse(call: retrofit2.Call<BackgroundImage>, response: retrofit2.Response<BackgroundImage>) {
-                if (response.isSuccessful){
+        call.enqueue(object : retrofit2.Callback<BackgroundImage> {
+            override fun onResponse(
+                call: retrofit2.Call<BackgroundImage>,
+                response: retrofit2.Response<BackgroundImage>
+            ) {
+                if (response.isSuccessful) {
                     Glide.with(this@MainActivity).load(response.body()?.imageUrl).into(imageView2)
                 }
             }
+
             override fun onFailure(call: retrofit2.Call<BackgroundImage>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
@@ -148,22 +130,25 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getWeatherInformation(){
+    private fun getWeatherInformation() {
         val request = ServiceBuilder.buildService(Endpoints::class.java)
         val call = request.getWeatherInformation()
-        call.enqueue(object : retrofit2.Callback<WeatherInfo>{
-            override fun onResponse(call: retrofit2.Call<WeatherInfo>, response: retrofit2.Response<WeatherInfo>) {
-                if (response.isSuccessful){
+        call.enqueue(object : retrofit2.Callback<WeatherInfo> {
+            override fun onResponse(
+                call: retrofit2.Call<WeatherInfo>,
+                response: retrofit2.Response<WeatherInfo>
+            ) {
+                if (response.isSuccessful) {
                     weather_temperature.text = response.body()!!.temperature
                 }
             }
+
             override fun onFailure(call: retrofit2.Call<WeatherInfo>, t: Throwable) {
                 Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
 
     }
-
 
 
 }

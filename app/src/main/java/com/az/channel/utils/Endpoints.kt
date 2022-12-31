@@ -8,7 +8,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface Endpoints {
-    @GET("/getChannelList")
+    @GET("/channels")
     fun getChannelList(): Call<List<ChannelItemNew>>
 
     @GET("/getBackgroundImage")
